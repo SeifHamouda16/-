@@ -20,9 +20,9 @@ data class UpdateInfo(
     val hasUpdate: Boolean = false,
     val latestVersionName: String = BuildConfig.VERSION_NAME,
     val latestVersionCode: Int = BuildConfig.VERSION_CODE,
-    val releaseNotesAr: String = "تحسينات عامة وإضافة شاشات العصور التاريخية والمقاطع الصوتية التوضيحية.",
-    val releaseNotesEn: String = "General improvements, historical eras detail screen, and audio guides.",
-    val downloadUrl: String = "",
+    val releaseNotesAr: String = "الإصدار 2.1.0: تحديث شامل يضم الواجهة الترحيبية الملكية، شعار حضارة مصر، السرد الصوتي لتاريخ مصر القديمة والأهرامات، ودعم الوضع الليلي والنهاري الملكي.",
+    val releaseNotesEn: String = "Version 2.1.0: Complete update featuring Royal Welcome Screen, Egypt Civilization emblem, audio narration, and Pharaoh themes.",
+    val apkFileName: String = "hadarat_misr.apk",
     val isChecking: Boolean = false,
     val isDownloading: Boolean = false,
     val downloadProgress: Int = 0,
@@ -83,7 +83,7 @@ class AppUpdateManager(private val context: Context) {
                 connection.connect()
 
                 val fileLength = connection.contentLength
-                val destinationFile = File(context.cacheDir, "update.apk")
+                val destinationFile = File(context.cacheDir, "hadarat_misr.apk")
                 if (destinationFile.exists()) destinationFile.delete()
 
                 connection.inputStream.use { input ->

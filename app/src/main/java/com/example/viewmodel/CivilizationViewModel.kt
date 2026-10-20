@@ -74,8 +74,11 @@ class CivilizationViewModel(application: Application) : AndroidViewModel(applica
             initialValue = emptyList()
         )
 
+    val hasSeenWelcome = progressManager.hasSeenWelcome
+
     private val _uiState = MutableStateFlow(
         UiState(
+            currentScreen = if (!progressManager.hasSeenWelcome.value) ScreenType.WELCOME else ScreenType.HOME,
             hieroglyphicResult = CivilizationData.translateToHieroglyphs("مصر أم الدنيا")
         )
     )
@@ -259,6 +262,19 @@ class CivilizationViewModel(application: Application) : AndroidViewModel(applica
         if (_uiState.value.currentScreen != screen) {
             navigationBackStack.add(_uiState.value.currentScreen)
             _uiState.value = _uiState.value.copy(currentScreen = screen)
+        }
+    }
+
+    fun completeWelcome() {
+        progressManager.setWelcomeCompleted(true)
+        navigationBackStack.clear()
+        _uiState.value = _uiState.value.copy(currentScreen = ScreenType.HOME)
+    }
+
+    fun openWelcomeScreen() {
+        if (_uiState.value.currentScreen != ScreenType.WELCOME) {
+            navigationBackStack.add(_uiState.value.currentScreen)
+            _uiState.value = _uiState.value.copy(currentScreen = ScreenType.WELCOME)
         }
     }
 

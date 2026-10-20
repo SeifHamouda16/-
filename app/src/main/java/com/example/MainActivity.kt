@@ -34,6 +34,7 @@ import com.example.ui.screens.HomeScreen
 import com.example.ui.screens.QuizResultScreen
 import com.example.ui.screens.QuizScreen
 import com.example.ui.screens.SectionDetailScreen
+import com.example.ui.screens.WelcomeScreen
 import com.example.data.HistoricalErasData
 import com.example.ui.theme.EgyptianCivilizationTheme
 import com.example.viewmodel.CivilizationViewModel
@@ -139,6 +140,20 @@ fun CivilizationApp(
                 .padding(innerPadding)
         ) {
             when (uiState.currentScreen) {
+                ScreenType.WELCOME -> {
+                    WelcomeScreen(
+                        currentLanguage = currentLanguage,
+                        isDarkTheme = isDark,
+                        royalThemeColor = royalThemeColor,
+                        canNavigateBack = viewModel.hasSeenWelcome.value,
+                        onStartJourney = { viewModel.completeWelcome() },
+                        onNavigateBack = { viewModel.navigateBack() },
+                        onLanguageChange = { lang -> viewModel.setLanguage(lang) },
+                        onToggleTheme = { viewModel.toggleThemeMode() },
+                        onCycleThemeColor = { viewModel.cycleRoyalThemeColor() }
+                    )
+                }
+
                 ScreenType.HOME -> {
                     HomeScreen(
                         sections = filteredSections,
@@ -165,7 +180,8 @@ fun CivilizationApp(
                         onPlayEraAudio = { era -> viewModel.playEraAudio(era) },
                         onToggleEraAudio = { viewModel.toggleEraAudioPlayback() },
                         onExpandAudioPlayer = { viewModel.openAudioPlayerDialog() },
-                        onOpenEraDetail = { era -> viewModel.openEraDetail(era) }
+                        onOpenEraDetail = { era -> viewModel.openEraDetail(era) },
+                        onOpenWelcome = { viewModel.openWelcomeScreen() }
                     )
                 }
 
@@ -314,7 +330,8 @@ fun CivilizationApp(
                         isCloudSyncing = isCloudSyncing,
                         cloudSyncMessage = cloudSyncMessage,
                         onUploadToCloud = { viewModel.uploadToCloudNow() },
-                        onDownloadFromCloud = { viewModel.downloadFromCloudNow() }
+                        onDownloadFromCloud = { viewModel.downloadFromCloudNow() },
+                        onOpenWelcome = { viewModel.openWelcomeScreen() }
                     )
                 }
             }

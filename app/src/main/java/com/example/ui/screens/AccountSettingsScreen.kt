@@ -23,6 +23,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.CloudDone
 import androidx.compose.material.icons.filled.CloudDownload
@@ -120,6 +121,7 @@ fun AccountSettingsScreen(
     cloudSyncMessage: String? = null,
     onUploadToCloud: () -> Unit = {},
     onDownloadFromCloud: () -> Unit = {},
+    onOpenWelcome: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     BackHandler {
@@ -1110,6 +1112,183 @@ fun AccountSettingsScreen(
                                         fontSize = 13.sp
                                     )
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Ancient Egypt Overview & Welcome Re-visitation Card
+            item {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { onOpenWelcome() }
+                        .testTag("account_open_welcome_card"),
+                    shape = RoundedCornerShape(18.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    border = androidx.compose.foundation.BorderStroke(1.2.dp, PharaohGold.copy(alpha = 0.6f))
+                ) {
+                    Row(
+                        modifier = Modifier.padding(16.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(14.dp)
+                    ) {
+                        Box(
+                            modifier = Modifier
+                                .size(48.dp)
+                                .clip(CircleShape)
+                                .background(PharaohGold.copy(alpha = 0.2f))
+                                .border(1.2.dp, PharaohGold, CircleShape),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text("📜", fontSize = 24.sp)
+                        }
+
+                        Column(modifier = Modifier.weight(1f)) {
+                            Text(
+                                text = if (currentLanguage == AppLanguage.ARABIC) "مقدمة تاريخ مصر القديمة والواجهة الترحيبية" else "Ancient Egypt History & Welcome Intro",
+                                style = MaterialTheme.typography.titleSmall,
+                                fontWeight = FontWeight.Bold,
+                                color = PharaohGold
+                            )
+                            Spacer(modifier = Modifier.height(2.dp))
+                            Text(
+                                text = if (currentLanguage == AppLanguage.ARABIC) "أعد قراءة النبذة التاريخية عن فجر التاريخ وعظمة الفراعنة" else "Revisit the historical overview of the dawn of history and pharaohs",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant
+                            )
+                        }
+
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                            contentDescription = null,
+                            tint = PharaohGold,
+                            modifier = Modifier.size(20.dp)
+                        )
+                    }
+                }
+            }
+
+            // App Package and APK Management Card (hadarat_misr.apk)
+            item {
+                Card(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("app_update_apk_card"),
+                    shape = RoundedCornerShape(18.dp),
+                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
+                    border = androidx.compose.foundation.BorderStroke(1.2.dp, PharaohGold.copy(alpha = 0.6f))
+                ) {
+                    Column(
+                        modifier = Modifier.padding(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .size(46.dp)
+                                    .clip(CircleShape)
+                                    .background(PharaohGold.copy(alpha = 0.15f))
+                                    .border(1.2.dp, PharaohGold, CircleShape),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.SystemUpdate,
+                                    contentDescription = null,
+                                    tint = PharaohGold,
+                                    modifier = Modifier.size(24.dp)
+                                )
+                            }
+
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    text = if (currentLanguage == AppLanguage.ARABIC) "حزمة التطبيق (hadarat_misr.apk)" else "App Package (hadarat_misr.apk)",
+                                    style = MaterialTheme.typography.titleSmall,
+                                    fontWeight = FontWeight.Bold,
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
+                                Spacer(modifier = Modifier.height(2.dp))
+                                Text(
+                                    text = if (currentLanguage == AppLanguage.ARABIC) "الإصدار v${BuildConfig.VERSION_NAME} (Build ${BuildConfig.VERSION_CODE}) • جاهز ومثبت" else "Version v${BuildConfig.VERSION_NAME} (Build ${BuildConfig.VERSION_CODE}) • Installed & Ready",
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+
+                            Surface(
+                                shape = RoundedCornerShape(10.dp),
+                                color = PharaohGold.copy(alpha = 0.15f),
+                                border = androidx.compose.foundation.BorderStroke(1.dp, PharaohGold)
+                            ) {
+                                Text(
+                                    text = "v${BuildConfig.VERSION_NAME}",
+                                    modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                                    style = MaterialTheme.typography.labelSmall,
+                                    fontWeight = FontWeight.Bold,
+                                    color = PharaohGold
+                                )
+                            }
+                        }
+
+                        // Release Notes Box
+                        Surface(
+                            shape = RoundedCornerShape(12.dp),
+                            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Column(modifier = Modifier.padding(12.dp)) {
+                                Text(
+                                    text = if (currentLanguage == AppLanguage.ARABIC) "ملاحظات الإصدار الجديد:" else "New Version Highlights:",
+                                    style = MaterialTheme.typography.labelMedium,
+                                    fontWeight = FontWeight.Bold,
+                                    color = PharaohGold
+                                )
+                                Spacer(modifier = Modifier.height(4.dp))
+                                Text(
+                                    text = if (currentLanguage == AppLanguage.ARABIC) updateInfo.releaseNotesAr else updateInfo.releaseNotesEn,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+
+                        // Actions Row
+                        Button(
+                            onClick = {
+                                onCheckForUpdates()
+                                Toast.makeText(
+                                    context,
+                                    if (currentLanguage == AppLanguage.ARABIC) "حزمة hadarat_misr.apk (الإصدار v${BuildConfig.VERSION_NAME}) محدثة وتعمل بنجاح! ✨" else "hadarat_misr.apk (v${BuildConfig.VERSION_NAME}) is up to date and active! ✨",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            },
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(46.dp)
+                                .testTag("check_update_button"),
+                            shape = RoundedCornerShape(14.dp),
+                            colors = ButtonDefaults.buttonColors(containerColor = PharaohGold)
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Sync,
+                                    contentDescription = null,
+                                    tint = Color.Black,
+                                    modifier = Modifier.size(18.dp)
+                                )
+                                Text(
+                                    text = if (currentLanguage == AppLanguage.ARABIC) "التحقق من حالة الحزمة والتحديثات" else "Check Package & Update Status",
+                                    color = Color.Black,
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 13.sp
+                                )
                             }
                         }
                     }

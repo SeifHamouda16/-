@@ -104,6 +104,7 @@ fun HomeScreen(
     onToggleEraAudio: () -> Unit = {},
     onExpandAudioPlayer: () -> Unit = {},
     onOpenEraDetail: (HistoricalEra) -> Unit = {},
+    onOpenWelcome: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -259,6 +260,31 @@ fun HomeScreen(
                         style = MaterialTheme.typography.bodyMedium,
                         color = Color.White.copy(alpha = 0.85f)
                     )
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    Surface(
+                        shape = RoundedCornerShape(20.dp),
+                        color = PharaohGold,
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(20.dp))
+                            .clickable { onOpenWelcome() }
+                            .testTag("home_open_welcome_button")
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 14.dp, vertical = 6.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            Text("📜", fontSize = 14.sp)
+                            Text(
+                                text = Localization.get("welcome_menu_item", currentLanguage),
+                                style = MaterialTheme.typography.labelMedium,
+                                color = Color.Black,
+                                fontWeight = FontWeight.ExtraBold
+                            )
+                        }
+                    }
                 }
             }
         }

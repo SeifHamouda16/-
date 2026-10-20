@@ -37,6 +37,8 @@ class UserProgressManager(context: Context) {
     private val _userProfile = MutableStateFlow(UserProfile())
     val userProfile: StateFlow<UserProfile> = _userProfile.asStateFlow()
 
+    private val _hasSeenWelcome = MutableStateFlow(false)
+    val hasSeenWelcome: StateFlow<Boolean> = _hasSeenWelcome.asStateFlow()
 
     init {
         loadData()
@@ -66,6 +68,8 @@ class UserProgressManager(context: Context) {
         _royalThemeColor.value = loadedRoyalColor
         com.example.ui.theme.CurrentRoyalThemeState.value = loadedRoyalColor
 
+        // Load welcome onboarding status
+        _hasSeenWelcome.value = prefs.getBoolean("KEY_HAS_SEEN_WELCOME", false)
 
         // Load user profile
         val isLoggedIn = prefs.getBoolean("KEY_USER_LOGGED_IN", false)
@@ -151,6 +155,10 @@ class UserProgressManager(context: Context) {
         return nextColor
     }
 
+    fun setWelcomeCompleted(completed: Boolean = true) {
+        _hasSeenWelcome.value = completed
+        prefs.edit().putBoolean("KEY_HAS_SEEN_WELCOME", completed).apply()
+    }
 
     fun saveUserProfile(name: String, email: String, avatarEmoji: String) {
         val now = System.currentTimeMillis()

@@ -144,7 +144,29 @@ object Localization {
         "stored_in_room" to "محفوظ في قاعدة بيانات Room وSharedPreferences",
         "guest_user" to "زائر جديد",
         "sync_status_title" to "حالة حفظ البيانات",
-        "sync_status_desc" to "جميع الاختبارات والأوسمة محفوظة ومؤمنة في جهازك"
+        "sync_status_desc" to "جميع الاختبارات والأوسمة محفوظة ومؤمنة في جهازك",
+
+        // Welcome Screen
+        "welcome_screen_title" to "حضارة مصر القديمة",
+        "welcome_screen_subtitle" to "رحلة عبر سبعة آلاف عام من المجد والخلود",
+        "welcome_badge" to "أهلاً بك في فجر التاريخ ☥",
+        "welcome_intro_title" to "مقدمة عن تاريخ مصر القديمة",
+        "welcome_intro_p1" to "نشأت الحضارة المصرية القديمة على ضفاف نهر النيل الخالد، شريان الحياة الذي وهب مصر خصوبتها واستقرارها، لتشهد تأسيس أول دولة مركزية موحدة في تاريخ البشرية منذ فجر التاريخ عام 3100 ق.م على يد الملك مينا.",
+        "welcome_intro_p2" to "شيد الفراعنة معجزات معمارية لا مثيل لها كالأهرامات الشامخة ومعابد الكرنك والأقصر، وطوروا علوماً سبقت عصرها في الطب، الفلك، والرياضيات، وخطوا أسرارهم بالهيروغليفية المقدسة مؤمنين بالخلود وقيم الحق (ماعت).",
+        "welcome_era1_title" to "عصر بناة الأهرام",
+        "welcome_era1_desc" to "أعظم إعجاز هندسي في التاريخ القديم وأهرامات الجيزة الخالدة.",
+        "welcome_era2_title" to "عصر الإمبراطورية والمجد",
+        "welcome_era2_desc" to "قيادة ملوك عظام كتحتمس الثالث ورمسيس الثاني لتأسيس قوة عظمى عالمية.",
+        "welcome_era3_title" to "العلوم والكتابة والخلود",
+        "welcome_era3_desc" to "ابتكار الهيروغليفية والتقويم الشمسي وأسرار التحنيط والطب المتقدم.",
+        "welcome_features_heading" to "ماذا ستكتشف في التطبيق؟",
+        "welcome_feat_explore" to "استكشاف تفاعلي لأقسام الحضارة وملوكها",
+        "welcome_feat_hieroglyphs" to "قاموس ومترجم الأبجدية الهيروغليفية الملكية",
+        "welcome_feat_quiz" to "اختبارات تفاعلية وأوسمة فرعونية قابلة للفتح",
+        "welcome_feat_audio" to "سرد تاريخي وصوتي ممتع يجعلك تعيش العصور القديمة",
+        "welcome_btn_start" to "ابدأ الرحلة الملكية ☥",
+        "welcome_btn_skip" to "تخطي إلى الرئيسية",
+        "welcome_menu_item" to "مقدمة الحضارة والترحيب"
     )
 
     private val ENGLISH_STRINGS = mapOf(
@@ -282,6 +304,28 @@ object Localization {
         "stored_in_room" to "Saved in Room Database & SharedPreferences",
         "guest_user" to "New Explorer",
         "sync_status_title" to "Data Persistence Status",
-        "sync_status_desc" to "All tests and badges are safely saved on your device"
+        "sync_status_desc" to "All tests and badges are safely saved on your device",
+
+        // Welcome Screen
+        "welcome_screen_title" to "Ancient Egyptian Civilization",
+        "welcome_screen_subtitle" to "A Journey Across 7,000 Years of Glory & Eternity",
+        "welcome_badge" to "Welcome to the Dawn of History ☥",
+        "welcome_intro_title" to "Introduction to Ancient Egyptian History",
+        "welcome_intro_p1" to "Ancient Egyptian civilization emerged along the banks of the eternal Nile River, the lifeline that blessed Egypt with prosperity, fostering the dawn of the first unified nation in human history around 3100 BC under King Menes.",
+        "welcome_intro_p2" to "The pharaohs erected unmatched architectural wonders from the towering Pyramids of Giza to Karnak and Luxor temples, pioneered advanced medical, astronomical, and mathematical sciences, and inscribed their eternal legacy in sacred hieroglyphs.",
+        "welcome_era1_title" to "The Pyramid Age",
+        "welcome_era1_desc" to "The greatest engineering marvel of antiquity and the eternal pyramids of Giza.",
+        "welcome_era2_title" to "The Golden Empire",
+        "welcome_era2_desc" to "Renowned pharaohs like Thutmose III and Ramesses II forged an ancient superpower.",
+        "welcome_era3_title" to "Hieroglyphs & Eternity",
+        "welcome_era3_desc" to "Sacred scripts, the 365-day solar calendar, and the secrets of mummification.",
+        "welcome_features_heading" to "What Will You Discover?",
+        "welcome_feat_explore" to "Interactive exploration of dynasties, pharaohs, and monuments",
+        "welcome_feat_hieroglyphs" to "Hieroglyphic alphabet dictionary and translator",
+        "welcome_feat_quiz" to "Challenging quizzes and unlockable royal pharaonic badges",
+        "welcome_feat_audio" to "Atmospheric audio narrations bringing ancient eras to life",
+        "welcome_btn_start" to "Begin Your Royal Journey ☥",
+        "welcome_btn_skip" to "Explore Home Directly",
+        "welcome_menu_item" to "Civilization Intro & Welcome"
     )
 }

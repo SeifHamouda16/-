@@ -65,6 +65,7 @@ data class HieroglyphGlyph(
 )
 
 enum class ScreenType {
+    WELCOME,
     HOME,
     SECTION_DETAIL,
     ERA_DETAIL,

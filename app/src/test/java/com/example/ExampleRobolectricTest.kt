@@ -188,4 +188,27 @@ class ExampleRobolectricTest {
         assertEquals("Gateways to Ancient Egyptian Eras", Localization.get("eras_entry_points_title", AppLanguage.ENGLISH))
         assertEquals("دخول واستكشاف العصر ➔", Localization.get("enter_era_portal", AppLanguage.ARABIC))
     }
+
+    @Test
+    fun `test welcome screen strings and onboarding progress`() {
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val progressManager = UserProgressManager(context)
+
+        // Verify welcome strings exist in Arabic and English
+        assertEquals("حضارة مصر القديمة", Localization.get("welcome_screen_title", AppLanguage.ARABIC))
+        assertEquals("Ancient Egyptian Civilization", Localization.get("welcome_screen_title", AppLanguage.ENGLISH))
+        assertTrue(Localization.get("welcome_intro_p1", AppLanguage.ARABIC).contains("النيل"))
+        assertTrue(Localization.get("welcome_intro_p1", AppLanguage.ENGLISH).contains("Nile"))
+
+        // Verify onboarding completion toggling
+        progressManager.setWelcomeCompleted(false)
+        assertFalse(progressManager.hasSeenWelcome.value)
+
+        progressManager.setWelcomeCompleted(true)
+        assertTrue(progressManager.hasSeenWelcome.value)
+
+        // Verify app logo drawable resource exists
+        val logoResId = context.resources.getIdentifier("app_logo_egypt", "drawable", context.packageName)
+        assertTrue("app_logo_egypt must exist in drawable resources", logoResId != 0)
+    }
 }
