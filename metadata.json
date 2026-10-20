@@ -1,0 +1,6 @@
+{
+  "name": "حضارة مصر",
+  "description": "تطبيق تعليمي تفاعلي شامل لاستكشاف تاريخ وحضارة مصر القديمة، مع اختبارات تفاعلية لكل قسم لقياس المعرفة وكسب الأوسمة الفرعونية.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

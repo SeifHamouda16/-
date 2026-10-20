@@ -1,0 +1,196 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User account profile storing identity, points, and title.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The unique Firebase Auth UID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The user's display name."
+        },
+        "email": {
+          "type": "string",
+          "description": "The user's email address."
+        },
+        "avatarEmoji": {
+          "type": "string",
+          "description": "Selected avatar emoji."
+        },
+        "avatarId": {
+          "type": "string",
+          "description": "Identifier for the chosen avatar."
+        },
+        "totalPoints": {
+          "type": "integer",
+          "description": "Total earned exploration and quiz points."
+        },
+        "pharaohTitle": {
+          "type": "string",
+          "description": "Earned pharaonic title based on progression."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of profile creation."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of last profile update."
+        }
+      },
+      "required": [
+        "userId",
+        "name",
+        "email",
+        "avatarEmoji",
+        "avatarId",
+        "totalPoints",
+        "pharaohTitle",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "QuizResult": {
+      "title": "QuizResult",
+      "description": "Quiz results for a specific civilization section.",
+      "type": "object",
+      "properties": {
+        "sectionId": {
+          "type": "string",
+          "description": "The ID of the tested section."
+        },
+        "userId": {
+          "type": "string",
+          "description": "The owner user ID."
+        },
+        "score": {
+          "type": "integer",
+          "description": "Correct answers count."
+        },
+        "totalQuestions": {
+          "type": "integer",
+          "description": "Total questions count."
+        },
+        "percentage": {
+          "type": "integer",
+          "description": "Score percentage (0-100)."
+        },
+        "passed": {
+          "type": "boolean",
+          "description": "Whether the exam was passed (>=70%)."
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of quiz completion."
+        }
+      },
+      "required": [
+        "sectionId",
+        "userId",
+        "score",
+        "totalQuestions",
+        "percentage",
+        "passed",
+        "completedAt"
+      ]
+    },
+    "CompletedSection": {
+      "title": "CompletedSection",
+      "description": "Record of a civilization section read and completed.",
+      "type": "object",
+      "properties": {
+        "sectionId": {
+          "type": "string",
+          "description": "The ID of the completed section."
+        },
+        "userId": {
+          "type": "string",
+          "description": "The owner user ID."
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of section completion."
+        }
+      },
+      "required": [
+        "sectionId",
+        "userId",
+        "completedAt"
+      ]
+    },
+    "EarnedBadge": {
+      "title": "EarnedBadge",
+      "description": "A pharaonic badge unlocked by passing section quizzes.",
+      "type": "object",
+      "properties": {
+        "badgeId": {
+          "type": "string",
+          "description": "Unique badge identifier."
+        },
+        "userId": {
+          "type": "string",
+          "description": "The owner user ID."
+        },
+        "title": {
+          "type": "string",
+          "description": "Royal badge title."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of achievements leading to this badge."
+        },
+        "glyphEmoji": {
+          "type": "string",
+          "description": "Hieroglyphic or icon representation."
+        },
+        "earnedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when badge was unlocked."
+        }
+      },
+      "required": [
+        "badgeId",
+        "userId",
+        "title",
+        "description",
+        "glyphEmoji",
+        "earnedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/UserProfile"
+      },
+      "description": "User profile document."
+    },
+    "/users/{userId}/quizResults/{sectionId}": {
+      "schema": {
+        "$ref": "#/entities/QuizResult"
+      },
+      "description": "Quiz results per section."
+    },
+    "/users/{userId}/completedSections/{sectionId}": {
+      "schema": {
+        "$ref": "#/entities/CompletedSection"
+      },
+      "description": "Completed reading sections."
+    },
+    "/users/{userId}/earnedBadges/{badgeId}": {
+      "schema": {
+        "$ref": "#/entities/EarnedBadge"
+      },
+      "description": "Earned pharaonic badges."
+    }
+  }
+}

@@ -1,0 +1,85 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isValidTimestamp(val) {
+      return val is timestamp && val <= request.time;
+    }
+
+    // User profile validation
+    function isValidUserProfile(data, userId) {
+      return data.userId == userId
+        && data.name is string && data.name.size() > 0 && data.name.size() <= 100
+        && data.email is string
+        && data.avatarEmoji is string
+        && data.totalPoints is int && data.totalPoints >= 0
+        && data.pharaohTitle is string
+        && isValidTimestamp(data.updatedAt);
+    }
+
+    // Quiz result validation
+    function isValidQuizResult(data, userId, sectionId) {
+      return data.userId == userId
+        && data.sectionId == sectionId
+        && data.score is int && data.score >= 0
+        && data.totalQuestions is int && data.totalQuestions > 0
+        && data.percentage is int && data.percentage >= 0 && data.percentage <= 100
+        && data.passed is bool
+        && isValidTimestamp(data.completedAt);
+    }
+
+    // Completed section validation
+    function isValidCompletedSection(data, userId, sectionId) {
+      return data.userId == userId
+        && data.sectionId == sectionId
+        && isValidTimestamp(data.completedAt);
+    }
+
+    // Earned badge validation
+    function isValidEarnedBadge(data, userId, badgeId) {
+      return data.userId == userId
+        && data.badgeId == badgeId
+        && data.title is string
+        && data.glyphEmoji is string
+        && isValidTimestamp(data.earnedAt);
+    }
+
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create, update: if isOwner(userId) && isValidUserProfile(request.resource.data, userId);
+      allow delete: if isOwner(userId);
+
+      match /quizResults/{sectionId} {
+        allow read: if isOwner(userId);
+        allow create, update: if isOwner(userId) && isValidQuizResult(request.resource.data, userId, sectionId);
+        allow delete: if isOwner(userId);
+      }
+
+      match /completedSections/{sectionId} {
+        allow read: if isOwner(userId);
+        allow create, update: if isOwner(userId) && isValidCompletedSection(request.resource.data, userId, sectionId);
+        allow delete: if isOwner(userId);
+      }
+
+      match /earnedBadges/{badgeId} {
+        allow read: if isOwner(userId);
+        allow create, update: if isOwner(userId) && isValidEarnedBadge(request.resource.data, userId, badgeId);
+        allow delete: if isOwner(userId);
+      }
+    }
+
+    // Global application content & broadcasts readable by all devices
+    match /app_updates/{document=**} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+  }
+}
