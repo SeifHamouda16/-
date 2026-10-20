@@ -69,7 +69,7 @@ class UserProgressManager(context: Context) {
         com.example.ui.theme.CurrentRoyalThemeState.value = loadedRoyalColor
 
         // Load welcome onboarding status
-        _hasSeenWelcome.value = prefs.getBoolean("KEY_HAS_SEEN_WELCOME", false)
+        _hasSeenWelcome.value = prefs.getBoolean("KEY_HAS_SEEN_WELCOME_V2", false)
 
         // Load user profile
         val isLoggedIn = prefs.getBoolean("KEY_USER_LOGGED_IN", false)
@@ -157,7 +157,7 @@ class UserProgressManager(context: Context) {
 
     fun setWelcomeCompleted(completed: Boolean = true) {
         _hasSeenWelcome.value = completed
-        prefs.edit().putBoolean("KEY_HAS_SEEN_WELCOME", completed).apply()
+        prefs.edit().putBoolean("KEY_HAS_SEEN_WELCOME_V2", completed).apply()
     }
 
     fun saveUserProfile(name: String, email: String, avatarEmoji: String) {
