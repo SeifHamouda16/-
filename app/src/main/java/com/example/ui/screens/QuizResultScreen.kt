@@ -49,10 +49,10 @@ import com.example.model.CivilizationSection
 import com.example.model.PharaonicBadge
 import com.example.model.SectionQuizResult
 import com.example.ui.components.PharaohTopAppBar
-import com.example.ui.theme.MalachiteGreen
 import com.example.ui.theme.NileLapisDark
 import com.example.ui.theme.PharaohGold
 import com.example.ui.theme.PharaohGoldDark
+import com.example.ui.theme.PureBlack
 import com.example.ui.theme.TerracottaRed
 import com.example.viewmodel.UserQuestionAnswer
 
@@ -288,7 +288,7 @@ fun QuizResultScreen(
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                     border = androidx.compose.foundation.BorderStroke(
                         1.dp,
-                        if (isCorrect) MalachiteGreen.copy(alpha = 0.5f) else TerracottaRed.copy(alpha = 0.5f)
+                        if (isCorrect) PharaohGold.copy(alpha = 0.5f) else TerracottaRed.copy(alpha = 0.5f)
                     )
                 ) {
                     Column(modifier = Modifier.padding(14.dp)) {
@@ -300,13 +300,13 @@ fun QuizResultScreen(
                                 modifier = Modifier
                                     .size(24.dp)
                                     .clip(CircleShape)
-                                    .background(if (isCorrect) MalachiteGreen else TerracottaRed),
+                                    .background(if (isCorrect) PharaohGold else TerracottaRed),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Icon(
                                     imageVector = if (isCorrect) Icons.Default.Check else Icons.Default.Close,
                                     contentDescription = null,
-                                    tint = Color.White,
+                                    tint = if (isCorrect) PureBlack else Color.White,
                                     modifier = Modifier.size(16.dp)
                                 )
                             }
@@ -327,12 +327,12 @@ fun QuizResultScreen(
                                 text = "إجابتك:",
                                 style = MaterialTheme.typography.labelSmall,
                                 fontWeight = FontWeight.Bold,
-                                color = if (isCorrect) MalachiteGreen else TerracottaRed
+                                color = if (isCorrect) PharaohGold else TerracottaRed
                             )
                             Text(
                                 text = selectedText,
                                 style = MaterialTheme.typography.bodySmall,
-                                color = if (isCorrect) MalachiteGreen else TerracottaRed,
+                                color = if (isCorrect) PharaohGold else TerracottaRed,
                                 fontWeight = FontWeight.SemiBold
                             )
                         }
@@ -344,12 +344,12 @@ fun QuizResultScreen(
                                     text = "الإجابة الصحيحة:",
                                     style = MaterialTheme.typography.labelSmall,
                                     fontWeight = FontWeight.Bold,
-                                    color = MalachiteGreen
+                                    color = PharaohGold
                                 )
                                 Text(
                                     text = correctText,
                                     style = MaterialTheme.typography.bodySmall,
-                                    color = MalachiteGreen,
+                                    color = PharaohGold,
                                     fontWeight = FontWeight.Bold
                                 )
                             }

@@ -189,33 +189,30 @@ fun WelcomeScreen(
 
                         // Day/Night toggle
                         Surface(
-                            shape = CircleShape,
+                            shape = RoundedCornerShape(16.dp),
                             color = MaterialTheme.colorScheme.surfaceVariant,
                             border = BorderStroke(1.dp, PharaohGold.copy(alpha = 0.5f)),
                             modifier = Modifier
-                                .size(38.dp)
-                                .clip(CircleShape)
+                                .clip(RoundedCornerShape(16.dp))
                                 .clickable { onToggleTheme() }
                                 .testTag("welcome_theme_mode_toggle")
                         ) {
-                            Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-                                Text(if (isDarkTheme) "🌙" else "☀️", fontSize = 16.sp)
-                            }
-                        }
-
-                        // Color theme cycle button
-                        Surface(
-                            shape = CircleShape,
-                            color = NileLapisDark,
-                            border = BorderStroke(1.4.dp, PharaohGold),
-                            modifier = Modifier
-                                .size(38.dp)
-                                .clip(CircleShape)
-                                .clickable { onCycleThemeColor() }
-                                .testTag("welcome_color_theme_toggle")
-                        ) {
-                            Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-                                Text("🎨", fontSize = 16.sp)
+                            Row(
+                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Text(if (isDarkTheme) "🌙" else "☀️", fontSize = 14.sp)
+                                Text(
+                                    text = if (isDarkTheme) {
+                                        if (currentLanguage == AppLanguage.ARABIC) "الليل" else "Night"
+                                    } else {
+                                        if (currentLanguage == AppLanguage.ARABIC) "النهار" else "Day"
+                                    },
+                                    style = MaterialTheme.typography.labelSmall,
+                                    color = PharaohGold,
+                                    fontWeight = FontWeight.Bold
+                                )
                             }
                         }
                     }
@@ -238,7 +235,7 @@ fun WelcomeScreen(
                                 Brush.radialGradient(
                                     colors = listOf(
                                         NileLapisDark,
-                                        Color(0xFF0A0E1A)
+                                        Color(0xFF14110A)
                                     )
                                 )
                             )

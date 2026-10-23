@@ -52,7 +52,6 @@ import com.example.data.local.EarnedBadgeEntity
 import com.example.model.PharaonicBadge
 import com.example.model.SectionQuizResult
 import com.example.ui.components.PharaohTopAppBar
-import com.example.ui.theme.MalachiteGreen
 import com.example.ui.theme.NileLapisDark
 import com.example.ui.theme.PharaohGold
 import com.example.ui.theme.PharaohGoldDark
@@ -280,14 +279,14 @@ fun AchievementsScreen(
 
                             Surface(
                                 shape = RoundedCornerShape(8.dp),
-                                color = if (mastered == erasProgress.size) MalachiteGreen.copy(alpha = 0.2f) else PharaohGold.copy(alpha = 0.2f),
-                                border = androidx.compose.foundation.BorderStroke(1.dp, if (mastered == erasProgress.size) MalachiteGreen else PharaohGold)
+                                color = PharaohGold.copy(alpha = 0.2f),
+                                border = androidx.compose.foundation.BorderStroke(1.dp, PharaohGold)
                             ) {
                                 Text(
-                                    text = "$mastered / ${erasProgress.size} حقب متقنة",
+                                    text = "$mastered / ${erasProgress.size} حقب متقنة 👑",
                                     style = MaterialTheme.typography.labelSmall,
                                     fontWeight = FontWeight.Bold,
-                                    color = if (mastered == erasProgress.size) MalachiteGreen else PharaohGold,
+                                    color = PharaohGold,
                                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                                 )
                             }
@@ -337,14 +336,14 @@ fun AchievementsScreen(
                                             .width(70.dp)
                                             .height(5.dp)
                                             .clip(RoundedCornerShape(3.dp)),
-                                        color = if (status.isMastered) MalachiteGreen else PharaohGold,
+                                        color = PharaohGold,
                                         trackColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f)
                                     )
                                     Text(
                                         text = "${status.overallPercentage}%",
                                         fontSize = 11.sp,
                                         fontWeight = FontWeight.Bold,
-                                        color = if (status.isMastered) MalachiteGreen else PharaohGold
+                                        color = PharaohGold
                                     )
                                 }
                             }
@@ -464,14 +463,16 @@ fun BadgeItemCard(badge: PharaonicBadge, isUnlocked: Boolean, roomEntity: Earned
                     if (isUnlocked) {
                         Surface(
                             shape = RoundedCornerShape(6.dp),
-                            color = MalachiteGreen.copy(alpha = 0.2f)
+                            color = PharaohGold.copy(alpha = 0.2f),
+                            border = androidx.compose.foundation.BorderStroke(0.8.dp, PharaohGold)
                         ) {
                             Row(
                                 modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp),
-                                verticalAlignment = Alignment.CenterVertically
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(2.dp)
                             ) {
-                                Icon(Icons.Default.Check, contentDescription = null, tint = MalachiteGreen, modifier = Modifier.size(12.dp))
-                                Text("مُكتسب", fontSize = 10.sp, color = MalachiteGreen, fontWeight = FontWeight.Bold)
+                                Icon(Icons.Default.Check, contentDescription = null, tint = PharaohGold, modifier = Modifier.size(12.dp))
+                                Text("مُكتسب بالذهب", fontSize = 10.sp, color = PharaohGold, fontWeight = FontWeight.Bold)
                             }
                         }
                     }

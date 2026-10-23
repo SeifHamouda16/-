@@ -68,7 +68,6 @@ import com.example.model.PharaohSecret
 import com.example.model.SectionQuizResult
 import com.example.model.SubTopic
 import com.example.ui.components.PharaohTopAppBar
-import com.example.ui.theme.MalachiteGreen
 import com.example.ui.theme.NileLapisDark
 import com.example.ui.theme.PharaohGold
 import com.example.ui.theme.PharaohGoldDark
@@ -140,7 +139,7 @@ fun SectionDetailScreen(
                             text = if (quizResult != null) "درجتك السابقة: ${quizResult.percentage}%" else "أنهيت قراءة هذا الجزء؟",
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.Bold,
-                            color = if (quizResult?.passed == true) MalachiteGreen else PharaohGold
+                            color = PharaohGold
                         )
                         Text(
                             text = "اختبر معلوماتك في ${section.quiz.size} أسئلة",
@@ -283,7 +282,7 @@ fun SectionDetailScreen(
                     // Mark as read button / check
                     Surface(
                         shape = RoundedCornerShape(8.dp),
-                        color = if (isCompleted) MalachiteGreen.copy(alpha = 0.15f) else PharaohGold.copy(alpha = 0.15f),
+                        color = PharaohGold.copy(alpha = 0.15f),
                         modifier = Modifier.clip(RoundedCornerShape(8.dp))
                     ) {
                         Row(
@@ -295,13 +294,13 @@ fun SectionDetailScreen(
                                 Icons.Default.CheckCircle,
                                 contentDescription = null,
                                 modifier = Modifier.size(14.dp),
-                                tint = if (isCompleted) MalachiteGreen else PharaohGold
+                                tint = PharaohGold
                             )
                             Text(
                                 text = if (isCompleted) "مكتمل" else "قيد التعلم",
                                 style = MaterialTheme.typography.labelSmall,
                                 fontWeight = FontWeight.Bold,
-                                color = if (isCompleted) MalachiteGreen else PharaohGold
+                                color = PharaohGold
                             )
                         }
                     }
@@ -378,7 +377,7 @@ fun SectionDetailScreen(
                         ),
                         border = androidx.compose.foundation.BorderStroke(
                             1.2.dp,
-                            if (isPlayingThisEra) MalachiteGreen else PharaohGold
+                            PharaohGold
                         )
                     ) {
                         Column(modifier = Modifier.padding(14.dp)) {
@@ -435,7 +434,7 @@ fun SectionDetailScreen(
                                         }
                                     },
                                     colors = ButtonDefaults.buttonColors(
-                                        containerColor = if (isPlayingThisEra) MalachiteGreen else PharaohGold,
+                                        containerColor = PharaohGold,
                                         contentColor = Color.Black
                                     ),
                                     shape = RoundedCornerShape(10.dp),

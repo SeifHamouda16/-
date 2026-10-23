@@ -62,7 +62,7 @@ class UserProgressManager(context: Context) {
         val themeCode = prefs.getString("KEY_THEME_MODE", com.example.model.ThemeMode.DARK.code) ?: com.example.model.ThemeMode.DARK.code
         _themeMode.value = if (themeCode == com.example.model.ThemeMode.LIGHT.code) com.example.model.ThemeMode.LIGHT else com.example.model.ThemeMode.DARK
 
-        // Load royal color preference
+        // Load royal color preference (defaults to GOLD)
         val royalColorCode = prefs.getString("KEY_ROYAL_THEME_COLOR", com.example.model.RoyalThemeColor.GOLD.code)
         val loadedRoyalColor = com.example.model.RoyalThemeColor.fromCode(royalColorCode)
         _royalThemeColor.value = loadedRoyalColor

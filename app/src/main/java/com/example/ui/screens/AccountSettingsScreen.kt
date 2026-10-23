@@ -79,7 +79,6 @@ import com.example.model.RoyalThemeColor
 import com.example.model.ThemeMode
 import com.example.model.UserProfile
 import com.example.ui.components.PharaohTopAppBar
-import com.example.ui.theme.MalachiteGreen
 import com.example.ui.theme.NileLapisDark
 import com.example.ui.theme.PharaohGold
 import com.example.ui.theme.PharaohGoldDark
@@ -110,7 +109,7 @@ fun AccountSettingsScreen(
     onSyncData: () -> Unit,
     onLanguageChange: (AppLanguage) -> Unit,
     onThemeChange: (ThemeMode) -> Unit,
-    royalThemeColor: RoyalThemeColor = RoyalThemeColor.GOLD,
+    royalThemeColor: RoyalThemeColor = RoyalThemeColor.MONOCHROME,
     onSelectRoyalColor: (RoyalThemeColor) -> Unit = {},
     onCycleRoyalColor: () -> Unit = {},
     onNavigateBack: () -> Unit,
@@ -241,19 +240,19 @@ fun AccountSettingsScreen(
                             Spacer(modifier = Modifier.height(8.dp))
                             Surface(
                                 shape = RoundedCornerShape(8.dp),
-                                color = MalachiteGreen.copy(alpha = 0.2f),
-                                border = androidx.compose.foundation.BorderStroke(1.dp, MalachiteGreen)
+                                color = PharaohGold.copy(alpha = 0.2f),
+                                border = androidx.compose.foundation.BorderStroke(1.dp, PharaohGold)
                             ) {
                                 Row(
                                     modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
                                     verticalAlignment = Alignment.CenterVertically,
                                     horizontalArrangement = Arrangement.spacedBy(4.dp)
                                 ) {
-                                    Icon(Icons.Default.CloudDone, contentDescription = null, tint = MalachiteGreen, modifier = Modifier.size(14.dp))
+                                    Icon(Icons.Default.CloudDone, contentDescription = null, tint = PharaohGold, modifier = Modifier.size(14.dp))
                                     Text(
                                         text = "حساب نشط ومحفوظ",
                                         style = MaterialTheme.typography.labelSmall,
-                                        color = MalachiteGreen,
+                                        color = PharaohGold,
                                         fontWeight = FontWeight.Bold
                                     )
                                 }
@@ -340,131 +339,7 @@ fun AccountSettingsScreen(
                 }
             }
 
-            // Royal Dynasty Theme Selector
-            item {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .testTag("royal_theme_style_card"),
-                    shape = RoundedCornerShape(18.dp),
-                    colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                    border = androidx.compose.foundation.BorderStroke(1.dp, PharaohGold.copy(alpha = 0.4f))
-                ) {
-                    Column(modifier = Modifier.padding(18.dp)) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(8.dp),
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text("👑", fontSize = 20.sp)
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(
-                                    text = if (currentLanguage == AppLanguage.ARABIC) "طابع الحضارة الملكي" else "Royal Civilization Style",
-                                    style = MaterialTheme.typography.titleMedium,
-                                    fontWeight = FontWeight.Bold,
-                                    color = MaterialTheme.colorScheme.onSurface
-                                )
-                                Text(
-                                    text = if (currentLanguage == AppLanguage.ARABIC) "المظهر النشط: ${royalThemeColor.titleAr} ${royalThemeColor.iconEmoji}" else "Active: ${royalThemeColor.titleEn} ${royalThemeColor.iconEmoji}",
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = PharaohGold,
-                                    fontWeight = FontWeight.SemiBold
-                                )
-                            }
-                            // زر التبديل السريع
-                            Surface(
-                                shape = RoundedCornerShape(10.dp),
-                                color = PharaohGold.copy(alpha = 0.15f),
-                                border = androidx.compose.foundation.BorderStroke(1.dp, PharaohGold),
-                                modifier = Modifier
-                                    .clickable { onCycleRoyalColor() }
-                                    .testTag("cycle_royal_theme_button")
-                            ) {
-                                Row(
-                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.spacedBy(4.dp)
-                                ) {
-                                    Text("🎨", fontSize = 16.sp)
-                                    Text(
-                                        text = if (currentLanguage == AppLanguage.ARABIC) "تبديل سريع" else "Cycle",
-                                        style = MaterialTheme.typography.labelMedium,
-                                        color = PharaohGold,
-                                        fontWeight = FontWeight.Bold
-                                    )
-                                }
-                            }
-                        }
 
-                        Spacer(modifier = Modifier.height(6.dp))
-
-                        Text(
-                            text = if (currentLanguage == AppLanguage.ARABIC) "اختر النمط الفرعوني المفضل لديك ليتحول شكل التطبيق بالكامل" else "Select your favorite Egyptian signature style",
-                            style = MaterialTheme.typography.bodySmall,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-
-                        Spacer(modifier = Modifier.height(14.dp))
-
-                        // خيارات الأنماط الملكية الـ 7
-                        Column(
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            RoyalThemeColor.values().forEach { royalColorOption ->
-                                val isSelected = royalThemeColor == royalColorOption
-                                val colorToken = Color(royalColorOption.hexValue)
-                                Surface(
-                                    shape = RoundedCornerShape(12.dp),
-                                    color = if (isSelected) colorToken.copy(alpha = 0.18f) else MaterialTheme.colorScheme.surfaceVariant,
-                                    border = androidx.compose.foundation.BorderStroke(
-                                        if (isSelected) 1.5.dp else 0.5.dp,
-                                        if (isSelected) colorToken else MaterialTheme.colorScheme.outline.copy(alpha = 0.25f)
-                                    ),
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .clickable { onSelectRoyalColor(royalColorOption) }
-                                        .testTag("royal_theme_item_${royalColorOption.code}")
-                                ) {
-                                    Row(
-                                        modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        horizontalArrangement = Arrangement.SpaceBetween
-                                    ) {
-                                        Row(
-                                            verticalAlignment = Alignment.CenterVertically,
-                                            horizontalArrangement = Arrangement.spacedBy(10.dp)
-                                        ) {
-                                            Box(
-                                                modifier = Modifier
-                                                    .size(24.dp)
-                                                    .clip(CircleShape)
-                                                    .background(colorToken)
-                                                    .border(1.dp, Color.White.copy(alpha = 0.5f), CircleShape)
-                                            )
-                                            Text(royalColorOption.iconEmoji, fontSize = 18.sp)
-                                            Text(
-                                                text = if (currentLanguage == AppLanguage.ARABIC) royalColorOption.titleAr else royalColorOption.titleEn,
-                                                fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                                                color = if (isSelected) colorToken else MaterialTheme.colorScheme.onSurface,
-                                                fontSize = 13.sp
-                                            )
-                                        }
-
-                                        if (isSelected) {
-                                            Icon(
-                                                Icons.Default.Check,
-                                                contentDescription = null,
-                                                tint = colorToken,
-                                                modifier = Modifier.size(18.dp)
-                                            )
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
 
             // Language Switcher Section (Core User Requirement: تغيير اللغة)
             item {
@@ -709,8 +584,8 @@ fun AccountSettingsScreen(
 
                             Surface(
                                 shape = RoundedCornerShape(12.dp),
-                                color = MalachiteGreen.copy(alpha = 0.1f),
-                                border = androidx.compose.foundation.BorderStroke(1.dp, MalachiteGreen.copy(alpha = 0.5f)),
+                                color = PharaohGold.copy(alpha = 0.1f),
+                                border = androidx.compose.foundation.BorderStroke(1.dp, PharaohGold.copy(alpha = 0.5f)),
                                 modifier = Modifier.fillMaxWidth()
                             ) {
                                 Row(
@@ -718,13 +593,13 @@ fun AccountSettingsScreen(
                                     verticalAlignment = Alignment.CenterVertically,
                                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                                 ) {
-                                    Icon(Icons.Default.CloudDone, contentDescription = null, tint = MalachiteGreen)
+                                    Icon(Icons.Default.CloudDone, contentDescription = null, tint = PharaohGold)
                                     Column {
                                         Text(
                                             text = "آخر حفظ ومزامنة ناجحة:",
                                             style = MaterialTheme.typography.labelSmall,
                                             fontWeight = FontWeight.Bold,
-                                            color = MalachiteGreen
+                                            color = PharaohGold
                                         )
                                         Text(
                                             text = lastSyncStr,
@@ -944,12 +819,12 @@ fun AccountSettingsScreen(
                                         verticalAlignment = Alignment.CenterVertically,
                                         horizontalArrangement = Arrangement.spacedBy(6.dp)
                                     ) {
-                                        Text("🟢", fontSize = 10.sp)
+                                        Text("✨", fontSize = 10.sp)
                                         Text(
                                             text = if (currentLanguage == AppLanguage.ARABIC) "سحابة Firebase متصلة ونشطة" else "Firebase Firestore Connected",
                                             style = MaterialTheme.typography.labelMedium,
                                             fontWeight = FontWeight.Bold,
-                                            color = MalachiteGreen
+                                            color = PharaohGold
                                         )
                                     }
 

@@ -45,11 +45,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.model.SectionQuizResult
 import com.example.ui.components.PharaohTopAppBar
-import com.example.ui.theme.MalachiteGreen
 import com.example.ui.theme.NileLapisDark
 import com.example.ui.theme.PharaohGold
 import com.example.ui.theme.PharaohGoldDark
 import com.example.ui.theme.PharaohGoldLight
+import com.example.ui.theme.PureBlack
 
 @Composable
 fun GrandExamScreen(
@@ -127,10 +127,10 @@ fun GrandExamScreen(
                         if (lastResult != null) {
                             Surface(
                                 shape = RoundedCornerShape(12.dp),
-                                color = if (lastResult.passed) MalachiteGreen.copy(alpha = 0.2f) else PharaohGold.copy(alpha = 0.2f),
+                                color = PharaohGold.copy(alpha = 0.2f),
                                 border = androidx.compose.foundation.BorderStroke(
                                     1.dp,
-                                    if (lastResult.passed) MalachiteGreen else PharaohGold
+                                    PharaohGold
                                 )
                             ) {
                                 Row(
@@ -141,14 +141,14 @@ fun GrandExamScreen(
                                     Icon(
                                         Icons.Default.EmojiEvents,
                                         contentDescription = null,
-                                        tint = if (lastResult.passed) MalachiteGreen else PharaohGold,
+                                        tint = PharaohGold,
                                         modifier = Modifier.size(18.dp)
                                     )
                                     Text(
                                         text = "أعلى درجة أحرزتها: ${lastResult.percentage}% (${lastResult.score} من ${lastResult.totalQuestions})",
                                         style = MaterialTheme.typography.titleSmall,
                                         fontWeight = FontWeight.Bold,
-                                        color = if (lastResult.passed) MalachiteGreen else PharaohGold
+                                        color = PharaohGold
                                     )
                                 }
                             }
@@ -207,14 +207,14 @@ fun GrandExamScreen(
                     shape = RoundedCornerShape(14.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = PharaohGold,
-                        contentColor = NileLapisDark
+                        contentColor = PureBlack
                     )
                 ) {
                     Icon(
                         Icons.Default.Quiz,
                         contentDescription = null,
                         modifier = Modifier.size(20.dp),
-                        tint = NileLapisDark
+                        tint = PureBlack
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(

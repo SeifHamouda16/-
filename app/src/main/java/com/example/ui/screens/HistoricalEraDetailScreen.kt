@@ -93,7 +93,6 @@ import com.example.model.HistoricalEra
 import com.example.model.SectionQuizResult
 import com.example.ui.components.AudioWaveformVisualizer
 import com.example.ui.components.PharaohTopAppBar
-import com.example.ui.theme.MalachiteGreen
 import com.example.ui.theme.PharaohGold
 import com.example.ui.theme.PharaohGoldDark
 import com.example.ui.theme.PharaohGoldLight
@@ -318,13 +317,13 @@ fun HistoricalEraDetailScreen(
                                     text = "${Localization.get("era_overall_progress", currentLanguage)} ${status.overallPercentage}%",
                                     fontSize = 12.sp,
                                     fontWeight = FontWeight.Bold,
-                                    color = if (status.isMastered) MalachiteGreen else PharaohGold
+                                    color = PharaohGold
                                 )
 
                                 Surface(
                                     shape = RoundedCornerShape(8.dp),
-                                    color = if (status.isMastered) MalachiteGreen.copy(alpha = 0.15f) else PharaohGold.copy(alpha = 0.15f),
-                                    border = BorderStroke(0.8.dp, if (status.isMastered) MalachiteGreen else PharaohGold)
+                                    color = PharaohGold.copy(alpha = 0.15f),
+                                    border = BorderStroke(0.8.dp, PharaohGold)
                                 ) {
                                     Text(
                                         text = if (status.isMastered) Localization.get("era_mastered_badge", currentLanguage)
@@ -332,7 +331,7 @@ fun HistoricalEraDetailScreen(
                                         else Localization.get("era_not_started_badge", currentLanguage),
                                         fontSize = 10.sp,
                                         fontWeight = FontWeight.Bold,
-                                        color = if (status.isMastered) MalachiteGreen else PharaohGold,
+                                        color = PharaohGold,
                                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp)
                                     )
                                 }
@@ -346,7 +345,7 @@ fun HistoricalEraDetailScreen(
                                     .fillMaxWidth()
                                     .height(6.dp)
                                     .clip(RoundedCornerShape(3.dp)),
-                                color = if (status.isMastered) MalachiteGreen else PharaohGold,
+                                color = PharaohGold,
                                 trackColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.2f)
                             )
                         }
@@ -736,7 +735,7 @@ fun HistoricalEraDetailScreen(
                             .testTag("era_section_card_${sec.id}"),
                         shape = RoundedCornerShape(16.dp),
                         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-                        border = BorderStroke(1.2.dp, if (isSecRead) MalachiteGreen else PharaohGold)
+                        border = BorderStroke(1.2.dp, PharaohGold)
                     ) {
                         Column(modifier = Modifier.padding(14.dp)) {
                             Row(
@@ -767,15 +766,15 @@ fun HistoricalEraDetailScreen(
 
                                 Surface(
                                     shape = RoundedCornerShape(8.dp),
-                                    color = if (isSecRead) MalachiteGreen.copy(alpha = 0.15f) else PharaohGold.copy(alpha = 0.15f),
-                                    border = BorderStroke(0.8.dp, if (isSecRead) MalachiteGreen else PharaohGold)
+                                    color = PharaohGold.copy(alpha = 0.15f),
+                                    border = BorderStroke(0.8.dp, PharaohGold)
                                 ) {
                                     Text(
                                         text = if (isSecRead) Localization.get("completed_tag", currentLanguage)
                                         else Localization.get("learning_in_progress", currentLanguage),
                                         fontSize = 10.sp,
                                         fontWeight = FontWeight.Bold,
-                                        color = if (isSecRead) MalachiteGreen else PharaohGold,
+                                        color = PharaohGold,
                                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                                     )
                                 }

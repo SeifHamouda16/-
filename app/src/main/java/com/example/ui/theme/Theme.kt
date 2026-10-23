@@ -15,26 +15,27 @@ fun EgyptianCivilizationTheme(
     royalColor: RoyalThemeColor = CurrentRoyalThemeState.value,
     content: @Composable () -> Unit
 ) {
-    // Keep CurrentRoyalThemeState synced so top-level PharaohGold tokens update instantly
+    // Keep CurrentRoyalThemeState and CurrentIsDarkThemeState synced so top-level tokens update instantly
+    CurrentIsDarkThemeState.value = darkTheme
     CurrentRoyalThemeState.value = royalColor
 
-    val primaryColor = Color(royalColor.hexValue)
-    val primaryLight = Color(royalColor.lightHexValue)
-    val primaryDark = Color(royalColor.darkHexValue)
-    val containerColor = Color(royalColor.containerHexValue)
+    val primaryColor = if (darkTheme) Color(royalColor.hexValue) else Color(royalColor.darkHexValue)
+    val primaryLight = if (darkTheme) Color(royalColor.lightHexValue) else Color(royalColor.darkHexValue)
+    val primaryDark = if (darkTheme) Color(0xFFC59B27) else Color(0xFF9E7817)
+    val containerColor = if (darkTheme) Color(royalColor.containerHexValue) else Color(0xFFFFF3D6)
 
     val colorScheme = if (darkTheme) {
         darkColorScheme(
             primary = primaryColor,
             onPrimary = PureBlack,
             primaryContainer = containerColor,
-            onPrimaryContainer = primaryLight,
-            secondary = PureWhite,
+            onPrimaryContainer = PureWhite,
+            secondary = primaryLight,
             onSecondary = PureBlack,
             secondaryContainer = DarkSurfaceVariant,
             onSecondaryContainer = PureWhite,
-            tertiary = TerracottaRed,
-            onTertiary = PureWhite,
+            tertiary = primaryDark,
+            onTertiary = PureBlack,
             background = PitchDarkBackground,
             onBackground = PureWhite,
             surface = DarkSurfaceCard,
@@ -45,15 +46,15 @@ fun EgyptianCivilizationTheme(
         )
     } else {
         lightColorScheme(
-            primary = primaryDark,
+            primary = primaryColor,
             onPrimary = PureWhite,
-            primaryContainer = primaryLight.copy(alpha = 0.25f),
+            primaryContainer = containerColor,
             onPrimaryContainer = PureBlack,
-            secondary = PureBlack,
+            secondary = primaryDark,
             onSecondary = PureWhite,
             secondaryContainer = LightSurfaceVariant,
             onSecondaryContainer = PureBlack,
-            tertiary = TerracottaRed,
+            tertiary = primaryColor,
             onTertiary = PureWhite,
             background = BrightLightBackground,
             onBackground = TextDark,

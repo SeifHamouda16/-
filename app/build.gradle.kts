@@ -16,8 +16,8 @@ android {
     applicationId = "com.aistudio.hadaratmisr.egquiz"
     minSdk = 24
     targetSdk = 36
-    versionCode = 3
-    versionName = "2.1.0"
+    versionCode = 6
+    versionName = "2.4.0"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }

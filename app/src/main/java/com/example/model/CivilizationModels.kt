@@ -74,6 +74,7 @@ enum class ScreenType {
     HIEROGLYPHS,
     ACHIEVEMENTS,
     GRAND_EXAM,
-    ACCOUNT_SETTINGS
+    ACCOUNT_SETTINGS,
+    GAMES
 }
 

@@ -49,11 +49,11 @@ import androidx.compose.ui.unit.sp
 import com.example.model.CivilizationSection
 import com.example.model.QuizQuestion
 import com.example.ui.components.PharaohTopAppBar
-import com.example.ui.theme.MalachiteGreen
 import com.example.ui.theme.NileLapisDark
 import com.example.ui.theme.PharaohGold
 import com.example.ui.theme.PharaohGoldDark
 import com.example.ui.theme.PharaohGoldLight
+import com.example.ui.theme.PureBlack
 import com.example.ui.theme.TerracottaRed
 
 @Composable
@@ -114,12 +114,31 @@ fun QuizScreen(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(
-                    text = "السؤال ${currentIndex + 1} من $totalCount",
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    color = PharaohGold
-                )
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    Text(
+                        text = "السؤال ${currentIndex + 1} من $totalCount",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        color = PharaohGold
+                    )
+
+                    Surface(
+                        shape = RoundedCornerShape(8.dp),
+                        color = TerracottaRed.copy(alpha = 0.15f),
+                        border = androidx.compose.foundation.BorderStroke(0.8.dp, TerracottaRed.copy(alpha = 0.6f))
+                    ) {
+                        Text(
+                            text = "🔥 تحدٍّ متقدم",
+                            style = MaterialTheme.typography.labelSmall,
+                            fontWeight = FontWeight.Bold,
+                            color = TerracottaRed,
+                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                        )
+                    }
+                }
 
                 Surface(
                     shape = RoundedCornerShape(8.dp),
@@ -234,8 +253,8 @@ fun QuizScreen(
                     }
                     isCorrect -> {
                         Triple(
-                            MalachiteGreen.copy(alpha = 0.2f),
-                            MalachiteGreen,
+                            PharaohGold.copy(alpha = 0.22f),
+                            PharaohGold,
                             MaterialTheme.colorScheme.onSurface
                         )
                     }
@@ -288,7 +307,7 @@ fun QuizScreen(
                                 .clip(CircleShape)
                                 .background(
                                     when {
-                                        isConfirmed && isCorrect -> MalachiteGreen
+                                        isConfirmed && isCorrect -> PharaohGold
                                         isConfirmed && isSelected -> TerracottaRed
                                         isSelected -> PharaohGold
                                         else -> MaterialTheme.colorScheme.surfaceVariant
@@ -297,7 +316,7 @@ fun QuizScreen(
                             contentAlignment = Alignment.Center
                         ) {
                             if (isConfirmed && isCorrect) {
-                                Icon(Icons.Default.Check, contentDescription = null, tint = Color.White, modifier = Modifier.size(20.dp))
+                                Icon(Icons.Default.Check, contentDescription = null, tint = PureBlack, modifier = Modifier.size(20.dp))
                             } else if (isConfirmed && isSelected) {
                                 Icon(Icons.Default.Close, contentDescription = null, tint = Color.White, modifier = Modifier.size(20.dp))
                             } else {
@@ -305,7 +324,7 @@ fun QuizScreen(
                                     text = letterBadge,
                                     fontWeight = FontWeight.Bold,
                                     fontSize = 15.sp,
-                                    color = if (isSelected) NileLapisDark else MaterialTheme.colorScheme.onSurface
+                                    color = if (isSelected) PureBlack else MaterialTheme.colorScheme.onSurface
                                 )
                             }
                         }
@@ -337,11 +356,11 @@ fun QuizScreen(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(16.dp),
                         colors = CardDefaults.cardColors(
-                            containerColor = if (isSelectedCorrect) MalachiteGreen.copy(alpha = 0.12f) else TerracottaRed.copy(alpha = 0.12f)
+                            containerColor = if (isSelectedCorrect) PharaohGold.copy(alpha = 0.15f) else TerracottaRed.copy(alpha = 0.12f)
                         ),
                         border = androidx.compose.foundation.BorderStroke(
                             1.dp,
-                            if (isSelectedCorrect) MalachiteGreen else TerracottaRed
+                            if (isSelectedCorrect) PharaohGold else TerracottaRed
                         )
                     ) {
                         Column(modifier = Modifier.padding(16.dp)) {
@@ -350,10 +369,10 @@ fun QuizScreen(
                                 horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
                                 Text(
-                                    text = if (isSelectedCorrect) "🎉 إجابة صحيحة وممتازة!" else "🏺 إجابة خاطئة!",
+                                    text = if (isSelectedCorrect) "👑 إجابة ملكية صحيحة!" else "🏺 إجابة غير دقيقة!",
                                     style = MaterialTheme.typography.titleMedium,
                                     fontWeight = FontWeight.Bold,
-                                    color = if (isSelectedCorrect) MalachiteGreen else TerracottaRed
+                                    color = if (isSelectedCorrect) PharaohGold else TerracottaRed
                                 )
                             }
 
@@ -416,7 +435,7 @@ fun QuizScreen(
                     shape = RoundedCornerShape(14.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = PharaohGold,
-                        contentColor = NileLapisDark,
+                        contentColor = PureBlack,
                         disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant,
                         disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -438,7 +457,7 @@ fun QuizScreen(
                     shape = RoundedCornerShape(14.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = PharaohGold,
-                        contentColor = NileLapisDark
+                        contentColor = PureBlack
                     )
                 ) {
                     Text(

@@ -20,17 +20,21 @@ enum class RoyalThemeColor(
     val containerHexValue: Long,
     val iconEmoji: String
 ) {
-    GOLD("gold", "الذهب الملكي", "Royal Gold", 0xFFE5C06EL, 0xFFFFE082L, 0xFF9E782FL, 0xFF2C2413L, "👑"),
-    LAPIS_BLUE("lapis", "لازورد النيل", "Nile Lapis", 0xFF2979FFL, 0xFF82B1FFL, 0xFF1565C0L, 0xFF0D2550L, "🌊"),
-    MALACHITE_GREEN("malachite", "زمرد الملاكيت", "Malachite Green", 0xFF00E676L, 0xFF69F0AEL, 0xFF00B248L, 0xFF083318L, "🌿"),
-    CARNELIAN_RED("carnelian", "عقيق الفراعنة", "Carnelian Red", 0xFFFF5252L, 0xFFFF8A80L, 0xFFD50000L, 0xFF420D0DL, "🔥"),
-    TURQUOISE("turquoise", "فيروز سيناء", "Sinai Turquoise", 0xFF00E5FFL, 0xFF84FFFFL, 0xFF00B8D4L, 0xFF003840L, "💎"),
-    AMETHYST_PURPLE("amethyst", "جمشت الملوك", "Royal Amethyst", 0xFFE040FBL, 0xFFEA80FCL, 0xFFAA00FFL, 0xFF380842L, "🔮"),
-    SUN_AMBER("amber", "شمس رع", "Ra Sun Amber", 0xFFFF9100L, 0xFFFFD180L, 0xFFFF6D00L, 0xFF402200L, "☀️");
+    GOLD("gold", "الذهب الفرعوني الملكي", "Royal Pharaoh Gold", 0xFFE5C06EL, 0xFFF3DE9CL, 0xFFC59B27L, 0xFF2C2208L, "👑"),
+    LAPIS("lapis", "اللازورد النيلي", "Nile Lapis Lazuli", 0xFF4A90E2L, 0xFF7BB3F0L, 0xFF1D5CA9L, 0xFF102744L, "💎"),
+    TURQUOISE("turquoise", "الفيروز السيناوي", "Sinai Turquoise", 0xFF20B2AAL, 0xFF48D1CCL, 0xFF008080L, 0xFF0D3330L, "🪲"),
+    CARNELIAN("carnelian", "العقيق الأحمر", "Carnelian Red", 0xFFE65100L, 0xFFFF7043L, 0xFFBF360CL, 0xFF3E1204L, "🔥"),
+    MONOCHROME("monochrome", "أبيض وأسود", "Monochrome", 0xFFFFFFFFL, 0xFFFFFFFFL, 0xFF000000L, 0xFF222222L, "♟️");
 
     companion object {
         fun fromCode(code: String?): RoyalThemeColor {
-            return values().firstOrNull { it.code.equals(code, ignoreCase = true) } ?: GOLD
+            return when (code?.lowercase()) {
+                "lapis" -> LAPIS
+                "turquoise" -> TURQUOISE
+                "carnelian" -> CARNELIAN
+                "monochrome" -> MONOCHROME
+                else -> GOLD
+            }
         }
     }
 }

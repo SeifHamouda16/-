@@ -71,7 +71,6 @@ import com.example.model.CivilizationSection
 import com.example.model.SectionQuizResult
 import com.example.model.UserProfile
 import com.example.ui.components.EraProgressTracker
-import com.example.ui.theme.MalachiteGreen
 import com.example.ui.theme.NileLapisDark
 import com.example.ui.theme.PharaohGold
 import com.example.ui.theme.PharaohGoldDark
@@ -105,6 +104,10 @@ fun HomeScreen(
     onExpandAudioPlayer: () -> Unit = {},
     onOpenEraDetail: (HistoricalEra) -> Unit = {},
     onOpenWelcome: () -> Unit = {},
+    isCloudSyncing: Boolean = false,
+    cloudSyncMessage: String? = null,
+    onUploadToCloud: () -> Unit = {},
+    onDownloadFromCloud: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -181,27 +184,6 @@ fun HomeScreen(
                                     style = MaterialTheme.typography.labelSmall,
                                     color = PharaohGold,
                                     fontWeight = FontWeight.Bold
-                                )
-                            }
-                        }
-
-                        // زر المظهر الملكي الفرعوني
-                        Surface(
-                            shape = CircleShape,
-                            color = NileLapisDark.copy(alpha = 0.85f),
-                            border = androidx.compose.foundation.BorderStroke(1.4.dp, PharaohGold),
-                            modifier = Modifier
-                                .size(36.dp)
-                                .clickable { onCycleThemeColor() }
-                                .testTag("home_colors_palette_button")
-                        ) {
-                            Box(
-                                contentAlignment = Alignment.Center,
-                                modifier = Modifier.fillMaxSize()
-                            ) {
-                                Text(
-                                    text = "🎨",
-                                    fontSize = 17.sp
                                 )
                             }
                         }
@@ -369,7 +351,7 @@ fun HomeScreen(
                             label = Localization.get("completed_sections", currentLanguage),
                             value = "$completedCount / $totalSec",
                             icon = Icons.Default.CheckCircle,
-                            tint = MalachiteGreen
+                            tint = PharaohGold
                         )
                         StatItem(
                             label = Localization.get("passed_quizzes", currentLanguage),
@@ -768,13 +750,13 @@ fun SectionCard(
                             Icon(
                                 Icons.Default.CheckCircle,
                                 contentDescription = null,
-                                tint = MalachiteGreen,
+                                tint = PharaohGold,
                                 modifier = Modifier.size(16.dp)
                             )
                             Text(
                                 text = Localization.get("completed_tag", currentLanguage),
                                 style = MaterialTheme.typography.labelSmall,
-                                color = MalachiteGreen,
+                                color = PharaohGold,
                                 fontWeight = FontWeight.Bold
                             )
                         } else {

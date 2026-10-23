@@ -73,7 +73,6 @@ import com.example.model.AppLanguage
 import com.example.model.AudioPlaybackState
 import com.example.model.CurrentAudioState
 import com.example.model.HistoricalEra
-import com.example.ui.theme.MalachiteGreen
 import com.example.ui.theme.PharaohGold
 import com.example.ui.theme.PharaohGoldDark
 import com.example.ui.theme.PharaohGoldLight

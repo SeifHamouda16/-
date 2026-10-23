@@ -63,17 +63,7 @@ fun PharaohTopAppBar(
                 }
             },
             actions = {
-                if (onCycleThemeColor != null) {
-                    IconButton(
-                        onClick = onCycleThemeColor,
-                        modifier = Modifier.testTag("top_bar_colors_toggle")
-                    ) {
-                        Text(
-                            text = "🎨",
-                            fontSize = 18.sp
-                        )
-                    }
-                }
+
                 if (onToggleTheme != null) {
                     IconButton(
                         onClick = onToggleTheme,

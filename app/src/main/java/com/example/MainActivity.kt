@@ -27,6 +27,7 @@ import com.example.ui.components.EraMiniAudioBar
 import com.example.ui.components.PharaohBottomNav
 import com.example.ui.screens.AccountSettingsScreen
 import com.example.ui.screens.AchievementsScreen
+import com.example.ui.screens.AncientEgyptianGamesScreen
 import com.example.ui.screens.GrandExamScreen
 import com.example.ui.screens.HieroglyphicsScreen
 import com.example.ui.screens.HistoricalEraDetailScreen
@@ -86,14 +87,16 @@ fun CivilizationApp(
     val isCloudSyncing by viewModel.isCloudSyncing.collectAsState()
     val cloudSyncMessage by viewModel.cloudSyncMessage.collectAsState()
     val isDark = themeMode == ThemeMode.DARK
+    val context = androidx.compose.ui.platform.LocalContext.current
 
     val userTitle = viewModel.progressManager.getUserPharaohTitle()
     val totalPoints = viewModel.progressManager.getTotalPoints()
 
-    // 4 clean core tabs in bottom nav (Grand Exam removed per user request)
+    // Bottom nav tabs (Sections, Hieroglyphs, Games, Achievements, Account)
     val showBottomNav = uiState.currentScreen in listOf(
         ScreenType.HOME,
         ScreenType.HIEROGLYPHS,
+        ScreenType.GAMES,
         ScreenType.ACHIEVEMENTS,
         ScreenType.ACCOUNT_SETTINGS
     )
@@ -181,7 +184,19 @@ fun CivilizationApp(
                         onToggleEraAudio = { viewModel.toggleEraAudioPlayback() },
                         onExpandAudioPlayer = { viewModel.openAudioPlayerDialog() },
                         onOpenEraDetail = { era -> viewModel.openEraDetail(era) },
-                        onOpenWelcome = { viewModel.openWelcomeScreen() }
+                        onOpenWelcome = { viewModel.openWelcomeScreen() },
+                        isCloudSyncing = isCloudSyncing,
+                        cloudSyncMessage = cloudSyncMessage,
+                        onUploadToCloud = {
+                            viewModel.uploadToCloudNow { success, msg ->
+                                android.widget.Toast.makeText(context, msg, android.widget.Toast.LENGTH_SHORT).show()
+                            }
+                        },
+                        onDownloadFromCloud = {
+                            viewModel.downloadFromCloudNow { success, msg ->
+                                android.widget.Toast.makeText(context, msg, android.widget.Toast.LENGTH_SHORT).show()
+                            }
+                        }
                     )
                 }
 
@@ -296,6 +311,15 @@ fun CivilizationApp(
                         onNavigateBack = { viewModel.navigateBack() },
                         onToggleTheme = { viewModel.toggleThemeMode() },
                         isDarkTheme = isDark
+                    )
+                }
+
+                ScreenType.GAMES -> {
+                    AncientEgyptianGamesScreen(
+                        currentLanguage = currentLanguage,
+                        isDarkTheme = isDark,
+                        onNavigateBack = { viewModel.navigateBack() },
+                        onToggleTheme = { viewModel.toggleThemeMode() }
                     )
                 }
 

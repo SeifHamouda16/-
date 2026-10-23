@@ -19,6 +19,7 @@ object Localization {
         // Navigation
         "nav_sections" to "الأقسام",
         "nav_hieroglyphs" to "الهيروغليفية",
+        "nav_games" to "الألعاب",
         "nav_badges" to "الأوسمة",
         "nav_grand_exam" to "التحدي الأكبر",
         "nav_account" to "الحساب",
@@ -179,6 +180,7 @@ object Localization {
         // Navigation
         "nav_sections" to "Sections",
         "nav_hieroglyphs" to "Hieroglyphs",
+        "nav_games" to "Games",
         "nav_badges" to "Badges",
         "nav_grand_exam" to "Grand Exam",
         "nav_account" to "Account",

@@ -10,6 +10,7 @@ import androidx.compose.material.icons.filled.AutoStories
 import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Quiz
+import androidx.compose.material.icons.filled.SportsEsports
 import androidx.compose.material.icons.filled.Translate
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -85,6 +86,21 @@ fun PharaohBottomNav(
                     unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
                 ),
                 modifier = Modifier.testTag("nav_item_hieroglyphs")
+            )
+
+            NavigationBarItem(
+                selected = currentScreen == ScreenType.GAMES,
+                onClick = { onNavigate(ScreenType.GAMES) },
+                icon = { Icon(Icons.Default.SportsEsports, contentDescription = Localization.get("nav_games", currentLanguage)) },
+                label = { Text(Localization.get("nav_games", currentLanguage), fontSize = 10.sp, fontWeight = FontWeight.SemiBold) },
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                    selectedTextColor = PharaohGold,
+                    indicatorColor = PharaohGold,
+                    unselectedIconColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                    unselectedTextColor = MaterialTheme.colorScheme.onSurfaceVariant
+                ),
+                modifier = Modifier.testTag("nav_item_games")
             )
 
             NavigationBarItem(

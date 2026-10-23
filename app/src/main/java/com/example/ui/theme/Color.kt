@@ -4,44 +4,45 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import com.example.model.RoyalThemeColor
 
-// Pure Monochrome Black & White Palette
+// Pure Colors & Backgrounds
 val PureBlack = Color(0xFF000000)
-val PitchDarkBackground = Color(0xFF080808)
-val DarkSurfaceCard = Color(0xFF141414)
-val DarkSurfaceVariant = Color(0xFF222222)
-val DarkOutline = Color(0xFF333333)
+val PitchDarkBackground = Color(0xFF0A1118)  // Majestic deep lapis night
+val DarkSurfaceCard = Color(0xFF0F1D2C)      // Royal lapis card surface
+val DarkSurfaceVariant = Color(0xFF162536)   // Lapis surface variant
+val DarkOutline = Color(0xFF2A3D52)          // Lapis outline border
 
 val PureWhite = Color(0xFFFFFFFF)
-val BrightLightBackground = Color(0xFFFFFFFF)
-val LightSurfaceCard = Color(0xFFF8F8F8)
-val LightSurfaceVariant = Color(0xFFEFEFEF)
-val LightOutline = Color(0xFFD8D8D8)
+val BrightLightBackground = Color(0xFFFDFBF7) // Warm papyrus & alabaster light background
+val LightSurfaceCard = Color(0xFFFFFFFF)      // Pure white crisp card
+val LightSurfaceVariant = Color(0xFFF4EFE6)   // Warm papyrus limestone variant
+val LightOutline = Color(0xFFE2D7C3)          // Warm golden outline
 
-// Active Royal Accent Theme State
+// Active Theme State
+val CurrentIsDarkThemeState = mutableStateOf(true)
 val CurrentRoyalThemeState = mutableStateOf(RoyalThemeColor.GOLD)
 
-// Dynamic Royal Pharaoh Tokens that adapt immediately to the user's selected color
+// Royal Pharaoh Gold Tokens
 val PharaohGold: Color
-    get() = Color(CurrentRoyalThemeState.value.hexValue)
+    get() = if (CurrentIsDarkThemeState.value) Color(0xFFE5C06E) else Color(0xFFC59B27)
 
 val PharaohGoldLight: Color
-    get() = Color(CurrentRoyalThemeState.value.lightHexValue)
+    get() = if (CurrentIsDarkThemeState.value) Color(0xFFF3DE9C) else Color(0xFFB8860B)
 
 val PharaohGoldDark: Color
-    get() = Color(CurrentRoyalThemeState.value.darkHexValue)
+    get() = Color(0xFF9E7817)
 
 val PharaohGoldContainer: Color
-    get() = Color(CurrentRoyalThemeState.value.containerHexValue)
+    get() = if (CurrentIsDarkThemeState.value) Color(0xFF2C2208) else Color(0xFFFFF3D6)
 
-// Secondary & Semantic Tokens
-val NileLapisDark = Color(0xFF121212)
-val NileLapisNavy = Color(0xFF1C1C1C)
-val NileLapisLight = Color(0xFF2A2A2A)
+// Pharaonic Royal Palette (Nile Lapis, Sinai Turquoise, Terracotta, Papyrus)
+val NileLapisDark = Color(0xFF0A1118)
+val NileLapisNavy = Color(0xFF0F1D2C)
+val NileLapisLight = Color(0xFF1E354D)
 
-val TerracottaRed = Color(0xFFD32F2F)
-val MalachiteGreen = Color(0xFF2E7D32)
+val TerracottaRed = Color(0xFFC0392B)
+val MalachiteGreen = Color(0xFF27AE60)
 
 val TextLight = Color(0xFFFFFFFF)
-val TextDark = Color(0xFF0D0D0D)
-val TextMuted = Color(0xFF757575)
-val TextMutedLight = Color(0xFFAAAAAA)
+val TextDark = Color(0xFF1A1A1A)
+val TextMuted = Color(0xFF888888)
+val TextMutedLight = Color(0xFFB0BEC5)

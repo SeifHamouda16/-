@@ -84,7 +84,6 @@ import com.example.model.CurrentAudioState
 import com.example.model.EraCompletionStatus
 import com.example.model.HistoricalEra
 import com.example.model.SectionQuizResult
-import com.example.ui.theme.MalachiteGreen
 import com.example.ui.theme.PharaohGold
 import com.example.ui.theme.PharaohGoldDark
 import com.example.ui.theme.PharaohGoldLight
@@ -356,7 +355,7 @@ private fun EraEntryPointCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
         border = BorderStroke(
             1.2.dp,
-            if (status.isMastered) MalachiteGreen else if (status.isStarted) PharaohGold else MaterialTheme.colorScheme.outline.copy(alpha = 0.35f)
+            if (status.isMastered || status.isStarted) PharaohGold else MaterialTheme.colorScheme.outline.copy(alpha = 0.35f)
         )
     ) {
         Column(
@@ -375,8 +374,8 @@ private fun EraEntryPointCard(
                 ) {
                     Surface(
                         shape = CircleShape,
-                        color = if (status.isMastered) MalachiteGreen.copy(alpha = 0.2f) else PharaohGold.copy(alpha = 0.18f),
-                        border = BorderStroke(1.2.dp, if (status.isMastered) MalachiteGreen else PharaohGold),
+                        color = PharaohGold.copy(alpha = 0.18f),
+                        border = BorderStroke(1.2.dp, PharaohGold),
                         modifier = Modifier.size(46.dp)
                     ) {
                         Box(contentAlignment = Alignment.Center) {
@@ -415,12 +414,11 @@ private fun EraEntryPointCard(
                 // Mastery Status Badge
                 Surface(
                     shape = RoundedCornerShape(10.dp),
-                    color = if (status.isMastered) MalachiteGreen.copy(alpha = 0.15f)
-                    else if (status.isStarted) PharaohGold.copy(alpha = 0.15f)
+                    color = if (status.isMastered || status.isStarted) PharaohGold.copy(alpha = 0.15f)
                     else MaterialTheme.colorScheme.surfaceVariant,
                     border = BorderStroke(
                         0.8.dp,
-                        if (status.isMastered) MalachiteGreen else if (status.isStarted) PharaohGold else MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
+                        if (status.isMastered || status.isStarted) PharaohGold else MaterialTheme.colorScheme.outline.copy(alpha = 0.3f)
                     )
                 ) {
                     Text(
@@ -429,7 +427,7 @@ private fun EraEntryPointCard(
                         else Localization.get("era_not_started_badge", currentLanguage),
                         fontSize = 10.sp,
                         fontWeight = FontWeight.Bold,
-                        color = if (status.isMastered) MalachiteGreen else if (status.isStarted) PharaohGold else MaterialTheme.colorScheme.onSurfaceVariant,
+                        color = if (status.isMastered || status.isStarted) PharaohGold else MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                     )
                 }
@@ -498,7 +496,7 @@ private fun EraEntryPointCard(
                         imageVector = Icons.Default.AutoStories,
                         contentDescription = null,
                         modifier = Modifier.size(14.dp),
-                        tint = if (status.completedSectionsCount > 0) MalachiteGreen else PharaohGold
+                        tint = PharaohGold
                     )
                     Text(
                         text = primarySection?.title ?: eraTitle,
@@ -519,14 +517,14 @@ private fun EraEntryPointCard(
                         text = "${status.overallPercentage}%",
                         fontSize = 11.sp,
                         fontWeight = FontWeight.ExtraBold,
-                        color = if (status.isMastered) MalachiteGreen else PharaohGold
+                        color = PharaohGold
                     )
 
                     // Audio Narration Button
                     Surface(
                         shape = RoundedCornerShape(6.dp),
-                        color = if (isAudioPlayingThisEra) MalachiteGreen else PharaohGold.copy(alpha = 0.2f),
-                        border = BorderStroke(0.8.dp, if (isAudioPlayingThisEra) MalachiteGreen else PharaohGold),
+                        color = PharaohGold.copy(alpha = 0.2f),
+                        border = BorderStroke(0.8.dp, PharaohGold),
                         modifier = Modifier
                             .clickable { onPlayAudio() }
                             .testTag("era_audio_button_${era.id}")
@@ -557,7 +555,7 @@ private fun EraEntryPointCard(
                     .fillMaxWidth()
                     .height(4.dp)
                     .clip(RoundedCornerShape(2.dp)),
-                color = if (status.isMastered) MalachiteGreen else PharaohGold,
+                color = PharaohGold,
                 trackColor = MaterialTheme.colorScheme.outline.copy(alpha = 0.15f)
             )
 
@@ -662,7 +660,7 @@ private fun EraTimelineView(
                 ) {
                     Surface(
                         shape = CircleShape,
-                        color = if (status.isMastered) MalachiteGreen else PharaohGold,
+                        color = PharaohGold,
                         border = BorderStroke(2.dp, PharaohGoldLight),
                         modifier = Modifier.size(28.dp)
                     ) {
